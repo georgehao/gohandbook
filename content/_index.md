@@ -42,10 +42,3 @@ Go 的源码挺不容易理解的，短短几百行代码如同天书一样，�
 * 回复 1，获取 《Go 源码流程图》
 
 ![](https://cdn.jsdelivr.net/gh/georgehao/img/me.png)
-
-
-## 版权
-
-以上内容均不得复制用于商业用途或发行
-
-© 2020-2021 haohongfan. Licensed under CC-BY-NC-ND 4.0.
