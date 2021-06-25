@@ -1,0 +1,44 @@
+<div class="flex flex-wrap justify-between">
+{{ if .Site.IsMultiLingual }}
+  {{ partial "docs/languages" . }}
+{{ end }}
+
+{{ if and .GitInfo .Site.Params.BookRepo }}
+  <div>
+    {{- $date := partial "docs/date" (dict "Date" .GitInfo.AuthorDate.Local "Format" .Site.Params.BookDateFormat) -}}
+    {{- $commitPath := default "commit" .Site.Params.BookCommitPath -}}
+    <a class="flex align-center" href="{{ .Site.Params.BookRepo }}/{{ $commitPath }}/{{ .GitInfo.Hash }}" title='{{ i18n "Last modified by" }} {{ .GitInfo.AuthorName }} | {{ $date }}' target="_blank" rel="noopener">
+      <img src="{{ "svg/calendar.svg" | relURL }}" class="book-icon" alt="Calendar" />
+      <span>{{ $date }}</span>
+    </a>
+  </div>
+{{ end }}
+
+{{ if and .File .Site.Params.BookRepo .Site.Params.BookEditPath }}
+  <div>
+    <a class="flex align-center" href="{{ .Site.Params.BookRepo }}/{{ .Site.Params.BookEditPath }}/{{ .Site.Params.contentDir | default "content" }}/{{ replace .File.Path "\\" "/" }}" target="_blank" rel="noopener">
+      <img src="{{ "svg/edit.svg" | relURL }}" class="book-icon" alt="Edit" />
+      <span>{{ i18n "Edit this page" }}</span>
+    </a>
+  </div>
+{{ end }}
+</div>
+
+{{ $script := resources.Get "clipboard.js" | resources.Minify }}
+{{ with $script.Content }}
+  <script>{{ . | safeJS }}</script>
+{{ end }}
+
+<footer id="footer">
+    <div class="container">
+		<div>
+		以上内容均不得复制用于商业用途或发行
+		</div>
+		<br/>
+        &copy; 2015-2021, By haohongfan Licensed under CC-BY-NC-ND 4.0</a>。
+        备案号：<a href="http://www.beian.miit.gov.cn" target="_blank">京ICP备17041575号</a>
+        {{ if .Site.Params.showHostPage }}
+        Hosted by <a rel="nofollow noreferer noopener" href="https://pages.coding.me" target="_blank">Coding Pages</a>.
+        {{ end }}
+    </div>
+</footer>
